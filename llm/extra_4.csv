@@ -1,0 +1,3 @@
+variant,text,label,llm_raw,llm_pred,note
+original_single,逆に会いたくないまであるわー,pos,ネガ,neg,元の4を単独で聞き直した
+with_wara,逆に会いたくないまであるわー笑,pos,ネガ,neg,末尾に「笑」を付けた版（評価本体の12件には含めない）
