@@ -36,7 +36,7 @@ results/personas.md        結果：ペルソナ推論が各回に仮定した�
 | 入力（人が作った） | `data/`、`prompts/` | 実験の前に固定した |
 | 記録（LLM が出した） | `outputs/` | 生の出力。手で直していない |
 | 処理 | `src/` | |
-| 結果（コードが作った） | `results/` | `src/run.py` を実行すると作り直される |
+| 結果（記録から作った） | `results/` | `predictions.csv` は `src/run.py` を実行すると作り直される。`personas.md` は推論過程から抜き出したもの |
 | 説明 | `README.md`、`docs/` | |
 
 ## データの列
