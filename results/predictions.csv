@@ -1,13 +1,13 @@
-id,text,label,rule_pred,llm_pred,persona_pred
-1,まじ尊すぎて死ぬ,pos,pos,pos,pos
-2,スパチャ送れねーどゆことー,neg,pos,neg,neg
-3,運営手際悪すぎー,neg,neg,neg,neg
-4,逆に会いたくないまであるわー,pos,neg,neg,pos
-5,こいついつも誕プレくれるんだけど笑まじだりー,pos,neg,neg,neg
-6,おじきもすぎ笑,neg,neg,neg,neg
-7,今日のライブえぐい！一生推す！！,pos,pos,pos,pos
-8,このネイル盛れすぎてあげ〜,pos,pos,pos,pos
-9,まじ彼氏の既読無視が通常運転すぎて優勝笑,neg,pos,neg,neg
-10,サイト待ち時間長すぎ笑　さすが運営、期待を裏切らないな－,neg,pos,neg,neg
-11,マジで推しが美しすぎてキャパい。,pos,pos,pos,pos
-12,起きたら10時でキャパい笑,neg,neg,neg,neg
+id,text,label,rule_pred,zeroshot_correct_of_5,persona_correct_of_5
+1,まじ尊すぎて死ぬ,pos,pos,5,5
+2,スパチャ送れねーどゆことー,neg,pos,5,5
+3,運営手際悪すぎー,neg,neg,5,5
+4,逆に会いたくないまであるわー,pos,neg,0,4
+5,こいついつも誕プレくれるんだけど笑まじだりー,pos,neg,0,1
+6,おじきもすぎ笑,neg,neg,5,5
+7,今日のライブえぐい！一生推す！！,pos,pos,5,5
+8,このネイル盛れすぎてあげ〜,pos,pos,5,5
+9,まじ彼氏の既読無視が通常運転すぎて優勝笑,neg,pos,5,5
+10,サイト待ち時間長すぎ笑　さすが運営、期待を裏切らないな－,neg,pos,5,5
+11,マジで推しが美しすぎてキャパい。,pos,pos,5,5
+12,起きたら10時でキャパい笑,neg,neg,5,5
