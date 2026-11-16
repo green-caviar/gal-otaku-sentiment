@@ -25,8 +25,10 @@ outputs/zeroshot/runN.csv  記録：LLM zero-shot の N 回目の判定
 outputs/persona/runN.csv   記録：LLM ペルソナ推論の N 回目の判定
 outputs/persona/runN.md    記録：LLM ペルソナ推論の N 回目の推論過程（原文）
 outputs/extra/post4_wara.csv  記録：追加の比較（投稿4の末尾に「笑」を付けた版）
+outputs/timing.csv         記録：各回の実行時間とトークン数
 src/run.py                 処理：ルールで判定し、全手法の正解数を数える
 results/predictions.csv    結果：run.py が作る集計
+results/personas.md        結果：ペルソナ推論が各回に仮定したペルソナ（outputs/persona/runN.md から抜き出し）
 ```
 
 | 役割 | 場所 | 扱い |

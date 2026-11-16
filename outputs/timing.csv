@@ -1,0 +1,11 @@
+method,run,duration_ms,subagent_tokens
+zeroshot,1,2014,37196
+zeroshot,2,2327,37196
+zeroshot,3,2308,37196
+zeroshot,4,2321,37196
+zeroshot,5,2302,37196
+persona,1,21414,39844
+persona,2,21640,39945
+persona,3,33963,41930
+persona,4,24837,40808
+persona,5,22403,39953
