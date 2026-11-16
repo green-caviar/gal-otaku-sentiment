@@ -2,7 +2,8 @@
 
 自然言語処理 第2回 演習「ポジ／ネガ判定を2つのアプローチで」の提出物。オタク・ギャル風の SNS 投稿12件を、ルール（単語リスト）と LLM（zero-shot、ペルソナ推論）で判定して比べる。
 
-- レポート：[docs/report.md](docs/report.md)
+- レポート（提出用、2ページ）：[docs/report.md](docs/report.md)
+- 詳しい記録：[docs/details.md](docs/details.md)
 - ラベル付きデータ：[data/labeled_data.csv](data/labeled_data.csv)
 
 ## 結果の要約
@@ -17,7 +18,8 @@
 
 ```text
 README.md                  このファイル（概要・地図・列の意味・再現手順）
-docs/report.md             レポート
+docs/report.md             提出用のレポート（要点、2ページ）
+docs/details.md            詳しい記録（投稿ごとの結果、推論時間、ペルソナの仮定、追加の比較）
 data/labeled_data.csv      入力：自作の投稿と正解ラベル
 prompts/zeroshot.txt       入力：LLM zero-shot のプロンプト
 prompts/persona.txt        入力：LLM ペルソナ推論のプロンプト
