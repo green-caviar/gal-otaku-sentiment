@@ -5,10 +5,11 @@
 
 入力:
     data/labeled_data.csv  id,text,label,note   （label は pos / neg）
-    llm/llm_preds.csv      id,llm_raw,llm_pred  （llm_pred は pos / neg。LLM の答えを写す）
+    llm/llm_preds.csv      id,llm_raw,llm_pred  （LLM zero-shot の答え。llm_pred は pos / neg）
+    llm/persona_preds.csv  id,llm_raw,llm_pred  （LLM ペルソナ推論の答え）
 出力:
     画面に正解数と誤りの一覧
-    results/predictions.csv  id,text,label,rule_pred,llm_pred
+    results/predictions.csv  id,text,label,rule_pred,llm_pred,persona_pred
 """
 
 import csv
@@ -16,12 +17,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "labeled_data.csv"
-LLM = ROOT / "llm" / "llm_preds.csv"
+# 比べる LLM の手法: (表示名, 予測ファイル, 出力の列名)
+LLM_METHODS = [
+    ("LLM zero-shot", ROOT / "llm" / "llm_preds.csv", "llm_pred"),
+    ("LLM ペルソナ推論", ROOT / "llm" / "persona_preds.csv", "persona_pred"),
+]
 OUT = ROOT / "results" / "predictions.csv"
 
 LABELS = {"pos", "neg"}
 
-# ルール（単語リスト）。どの語を入れるかは自分で決めて、README の「手法」に書く。
+# ルール（単語リスト）。どの語を入れるかは自分で決めて、docs/report.md の「手法」に書く。
 POS_WORDS = ["最高", "好き", "推す", "尊", "美し", "盛れ", "あげ", "優勝", "さすが"]
 NEG_WORDS = ["死ぬ", "だりー", "だるい", "きも", "悪すぎ", "長すぎ", "えぐい", "キャパい", "会いたくない", "無理"]
 
@@ -57,20 +62,25 @@ def main() -> None:
             raise SystemExit(f"id={r['id']} の label が pos / neg 以外: {r['label']!r}")
         r["rule_pred"] = rule_classify(r["text"])
 
-    llm = {r["id"]: r["llm_pred"] for r in read_csv(LLM)}
-    missing = [r["id"] for r in rows if r["id"] not in llm]
-    for r in rows:
-        r["llm_pred"] = llm.get(r["id"], "")
-
+    fields = ["id", "text", "label", "rule_pred"]
     evaluate("ルール", rows, "rule_pred")
-    if missing:
-        print(f"LLM: 答えがまだない id = {', '.join(missing)}（llm/llm_preds.csv に写す）")
-    else:
-        evaluate("LLM", rows, "llm_pred")
+    for name, path, key in LLM_METHODS:
+        if not path.exists():
+            print(f"{name}: {path.relative_to(ROOT)} がまだない")
+            continue
+        preds = {r["id"]: r["llm_pred"] for r in read_csv(path)}
+        missing = [r["id"] for r in rows if r["id"] not in preds]
+        for r in rows:
+            r[key] = preds.get(r["id"], "")
+        fields.append(key)
+        if missing:
+            print(f"{name}: 答えがまだない id = {', '.join(missing)}")
+        else:
+            evaluate(name, rows, key)
 
     OUT.parent.mkdir(exist_ok=True)
     with OUT.open("w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["id", "text", "label", "rule_pred", "llm_pred"])
+        w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()
         for r in rows:
             w.writerow({k: r[k] for k in w.fieldnames})
