@@ -5,8 +5,8 @@
 
 入力:
     data/labeled_data.csv     id,text,label,note   （label は pos / neg）
-    llm/zeroshot/run*.csv     id,llm_raw,llm_pred  （LLM zero-shot の各回の答え）
-    llm/persona/run*.csv      id,llm_raw,llm_pred  （LLM ペルソナ推論の各回の答え）
+    outputs/zeroshot/run*.csv   id,llm_raw,llm_pred  （LLM zero-shot の各回の答え）
+    outputs/persona/run*.csv    id,llm_raw,llm_pred  （LLM ペルソナ推論の各回の答え）
 出力:
     画面に、手法ごとの各回の正解数・平均・誤り
     results/predictions.csv   投稿ごとに、ルールの予測と、各 LLM 手法で正解した回数
@@ -19,8 +19,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "labeled_data.csv"
 # 比べる LLM の手法: (表示名, 各回の答えを置くフォルダ, 出力の列名)
 LLM_METHODS = [
-    ("LLM zero-shot", ROOT / "llm" / "zeroshot", "zeroshot"),
-    ("LLM ペルソナ推論", ROOT / "llm" / "persona", "persona"),
+    ("LLM zero-shot", ROOT / "outputs" / "zeroshot", "zeroshot"),
+    ("LLM ペルソナ推論", ROOT / "outputs" / "persona", "persona"),
 ]
 OUT = ROOT / "results" / "predictions.csv"
 
